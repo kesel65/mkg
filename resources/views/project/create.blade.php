@@ -2,14 +2,13 @@
 
 @section('content')
     <div class="container top-margin">
-        {!! Form::open(['action' => 'ProjectController@store', 'method' => 'POST']) !!}
-        {!! Form::token() !!}
+        {!! Form::open(['action' => 'ProjectController@store', 'method' => 'POST', 'files' => true]) !!}
         {!! Form::label('name', 'Project Name') !!}
         {!! Form::text('name', old('name'), ['class' => 'form-control', 'placeholder' => 'Project Name']) !!}
         {!! Form::label('url', 'Project URL') !!}
         {!! Form::text('url', old('url'), ['class' => 'form-control', 'placeholder' => 'Project URL']) !!}
-        {!! Form::label('photo_url', 'Project Photo URL') !!}
-        {!! Form::text('photo_url', old('photo_url'), ['class' => 'form-control', 'placeholder' => 'Project Photo URL']) !!}
+        {!! Form::label('photo', 'Project Photo') !!}
+        {!! Form::file('photo', ['class' => 'form-control-file']) !!}
         {!! Form::label('short_description', 'Project Short Description') !!}
         {!! Form::text('short_description', old('short_description'), ['class' => 'form-control', 'placeholder' => 'Project Short Description']) !!}
         {!! Form::label('description', 'Project Description') !!}

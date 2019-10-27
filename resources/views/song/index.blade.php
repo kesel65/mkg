@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container top-margin text-center">
-        @if(count($songs) === 0)
+        @if(empty($songs))
             <h1>Nothing to see here!</h1>
         @else
             @foreach($songs as $song)

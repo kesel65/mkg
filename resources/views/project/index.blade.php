@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container top-margin text-center">
-        @if(count($projects) === 0 && $projects[0] != '')
+        @if(empty($projects))
             <h2>Nothing to see here!</h2>
         @else
             @foreach($projects as $project)

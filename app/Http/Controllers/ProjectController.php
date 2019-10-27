@@ -40,9 +40,25 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-        Project::create( $this->verifyInput($request) );
-        $project = Project::latest()->first();
-        $this->show($project);
+        $request->validate([
+           'photo' => 'required|image|mimes:jpeg,png,jpg,gif,svg'
+        ]);
+        if($request->hasFile('photo')) {
+            $path = $request->file('photo')->storePubliclyAs('/public/images/uploads/projects', $request->file('photo')->getClientOriginalName());
+//        dd($request);
+            $request->request->add(['photo_url' => $path]);
+//        ddd($request);
+            Project::create( $this->verifyInput($request) );
+            $projects = Project::take(3)->latest('updated_at')->get();
+            if(count($projects) === 0) {
+                return view('project.index', ['title' => "Michelle's Development Portfolio", 'projects' => '']);
+            } else {
+                return view('project.index', ['title' => "Michelle's Development Portfolio", 'projects' => $projects]);
+            }
+        } else {
+            back(['title' => 'Create New Project']);
+        }
+
     }
 
     /**
@@ -76,7 +92,13 @@ class ProjectController extends Controller
      */
     public function update(Request $request, Project $project)
     {
-        $project->update($this->verifyInput($request));
+        $photo_name = 'images/projects/' . $request->photo->name();
+        $photo_name .= date('Ymd');
+        $photo_name .= $request->photo->extension();
+        $request->photo->move(public_path('/images/uploads'), $photo_name);
+
+        $request->photo_url = $photo_name;
+        $project->update( $this->verifyInput($request) );
         $project->save();
         return view('project.show', ['title' => "Michelle's Project $project->name", 'project' => $project]);
     }
@@ -95,14 +117,15 @@ class ProjectController extends Controller
     }
 
     public function verifyInput(Request $request) {
+//        ddd($request);
         return $request->validate([
             'name' => 'required|min:5|max:255',
             'url' => 'required|url',
-            'photo_url' => 'required',
             'short_description' => 'required|min:3|max:255',
             'description' => 'required|min:10',
             'demo' => 'required',
-            'published_at' => 'date'
+            'published_at' => 'date',
+            'photo_url' => 'required'
         ]);
     }
 }
