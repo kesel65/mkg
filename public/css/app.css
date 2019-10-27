@@ -1,0 +1,24 @@
+.top-margin {
+  margin-top: 80px;
+}
+
+.margin-left {
+  margin-left: 15px;
+}
+
+.roboto {
+  font-family: "Roboto Mono", monospace;
+}
+
+.rocksalt {
+  font-family: "Rock Salt", cursive;
+}
+
+.media > a > img {
+  max-width: 400px;
+}
+
+.media > img {
+  max-width: 400px;
+}
+
