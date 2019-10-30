@@ -1,10 +1,8 @@
 @extends('layout')
 
 @section('content')
-    <div class="container marketing">
-
+    <div class="container marketing top-margin">
         <hr class="featurette-divider">
-
         <div class="row featurette">
             <div class="col-md-7">
                 <h2 class="featurette-heading">Education <span class="text-muted">Rochester Institute of Technology</span></h2>
@@ -14,9 +12,7 @@
                 <img class="featurette-image img-fluid mx-auto" src="/images/photo-grads.jpeg" alt="Photo of Graduates">
             </div>
         </div>
-
         <hr class="featurette-divider">
-
         <div class="row featurette">
             <div class="col-md-7 push-md-5">
                 <h2 class="featurette-heading">Current Employer <span class="text-muted">Bank of America</span></h2>
@@ -26,9 +22,7 @@
                 <img class="featurette-image img-fluid mx-auto" src="/images/photo-buildingbridge.jpeg" alt="Bridge Between Buildings">
             </div>
         </div>
-
         <hr class="featurette-divider">
-
         <div class="row featurette">
             <div class="col-md-7">
                 <h2 class="featurette-heading">Future Employment <span class="text-muted">Developer</span></h2>
@@ -38,8 +32,6 @@
                 <img class="featurette-image img-fluid mx-auto" src="/images/photo-road.jpeg" alt="The Road Ahead">
             </div>
         </div>
-
         <hr class="featurette-divider">
-
     </div>
 @endsection

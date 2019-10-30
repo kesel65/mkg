@@ -21,7 +21,7 @@ class CreateProjectsTable extends Migration
             $table->string('short_description');
             $table->text('description');
             $table->date('published_at')->nullable;
-            $table->boolean('demo')->default(true);
+            $table->boolean('demo')->default(false);
             $table->timestamps();
         });
     }

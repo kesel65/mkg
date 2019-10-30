@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Project;
 use Illuminate\Http\Request;
+use Illuminate\Http\File;
 
 class ProjectController extends Controller
 {
@@ -44,10 +45,9 @@ class ProjectController extends Controller
            'photo' => 'required|image|mimes:jpeg,png,jpg,gif,svg'
         ]);
         if($request->hasFile('photo')) {
-            $path = $request->file('photo')->storePubliclyAs('/public/images/uploads/projects', $request->file('photo')->getClientOriginalName());
-//        dd($request);
+            $Name =  rand(1,2000) . $request->file('photo')->getClientOriginalName();
+            $path = $request->file('photo')->storePubliclyAs('/images/uploads/projects/', $Name, ['disk' => 'public']);
             $request->request->add(['photo_url' => $path]);
-//        ddd($request);
             Project::create( $this->verifyInput($request) );
             $projects = Project::take(3)->latest('updated_at')->get();
             if(count($projects) === 0) {
@@ -58,7 +58,6 @@ class ProjectController extends Controller
         } else {
             back(['title' => 'Create New Project']);
         }
-
     }
 
     /**
@@ -92,15 +91,20 @@ class ProjectController extends Controller
      */
     public function update(Request $request, Project $project)
     {
-        $photo_name = 'images/projects/' . $request->photo->name();
-        $photo_name .= date('Ymd');
-        $photo_name .= $request->photo->extension();
-        $request->photo->move(public_path('/images/uploads'), $photo_name);
+        $request->validate([
+            'photo' => 'required|image|mimes:jpeg,png,jpg,gif,svg'
+        ]);
+        if($request->hasFile('photo')) {
 
-        $request->photo_url = $photo_name;
-        $project->update( $this->verifyInput($request) );
-        $project->save();
-        return view('project.show', ['title' => "Michelle's Project $project->name", 'project' => $project]);
+            $Name =  rand(1,2000) . $request->file('photo')->getClientOriginalName();
+            $path = $request->file('photo')->storePubliclyAs('/images/uploads/projects/', $Name, ['disk' => 'public']);
+            $request->request->add(['photo_url' => $path]);
+            $project->update( $this->verifyInput($request) );
+            $project->save();
+            return view('project.show', ['title' => "Michelle's Project $project->name", 'project' => $project]);
+        } else {
+            back(['title' => "Edit Project $project->name"]);
+        }
     }
 
     /**
@@ -121,11 +125,11 @@ class ProjectController extends Controller
         return $request->validate([
             'name' => 'required|min:5|max:255',
             'url' => 'required|url',
+            'photo_url' => 'required',
             'short_description' => 'required|min:3|max:255',
-            'description' => 'required|min:10',
+            'description' => 'required',
             'demo' => 'required',
-            'published_at' => 'date',
-            'photo_url' => 'required'
+            'published_at' => 'required|date',
         ]);
     }
 }

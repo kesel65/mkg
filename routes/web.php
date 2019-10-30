@@ -19,7 +19,9 @@ Route::get('bio', 'Bio@index')->name('bio');
 
 Route::get('portfolio', 'ProjectController@index')->name('portfolio');
 
-Route::get('resume', 'CertController@index')->name('resume');
+Route::get('resume', function() {
+    return view('resume', ['title' => "Michelle Kesel's Resume"]);
+})->name('resume');
 
 Route::get('contact', 'ContactController@index')->name('contact');
 Route::post('contact', 'ContactController@store')->name('contact.store');

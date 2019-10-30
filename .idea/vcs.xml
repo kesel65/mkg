@@ -3,6 +3,5 @@
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/laravel-ide-helper" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/xdebug" vcs="Git" />
   </component>
 </project>
