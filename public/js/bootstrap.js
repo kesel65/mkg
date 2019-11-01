@@ -17802,7 +17802,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /Users/lambdadelta2/Sites/mkg/vendor/twbs/bootstrap/dist/js/bootstrap.js */"./vendor/twbs/bootstrap/dist/js/bootstrap.js");
+module.exports = __webpack_require__(/*! /home/michellekesel/code/mkg/vendor/twbs/bootstrap/dist/js/bootstrap.js */"./vendor/twbs/bootstrap/dist/js/bootstrap.js");
 
 
 /***/ })
